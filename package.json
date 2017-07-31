@@ -2,7 +2,7 @@
   "name": "@lassehaslev/iframe-scaler",
   "version": "0.1.0",
   "description": "Scale iframes propotionally",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "ava",
     "tdd": "executor 'npm run build && npm run test' --watch='**/*.js' --ignore='node_modules/' --ignore='dist/'",
