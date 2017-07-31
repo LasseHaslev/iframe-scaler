@@ -4,9 +4,23 @@
   "description": "Scale iframes propotionally",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava",
+    "tdd": "executor 'npm run build && npm run test' --watch='**/*.js' --ignore='node_modules/' --ignore='dist/'",
+    "build": "babel src -d dist",
+    "prepublish": "npm run build"
   },
-  "keywords": [ "scale", "iframe", "responsive" ],
+  "keywords": [
+    "scale",
+    "iframe",
+    "responsive"
+  ],
   "author": "Lasse S. Haslev",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "browser-env": "^3.1.0",
+    "executor": "^0.0.1"
+  }
 }
