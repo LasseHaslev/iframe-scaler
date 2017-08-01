@@ -36,7 +36,7 @@ class IframeScaler {
      * Scale one time
      */
     scale() {
-        this.scaleIframe( this.element );
+        IframeScaler.scaleIframe( this.element, this.options.upscale );
     }
 
     /*
@@ -52,17 +52,17 @@ class IframeScaler {
     }
 
     // Do the scaling of the iframe
-    scaleIframe( iframe ) {
+    static scaleIframe( iframe, upscale = false ) {
 
         var element = iframe ? iframe : this.element;
 
-        var percentage = IframeScaler.calculatePercentage( element, this.options.upscale );
+        var percentage = IframeScaler.calculatePercentage( element, upscale );
         // http://stackoverflow.com/questions/166160/how-can-i-scale-the-content-of-an-iframe
         element.style.transform = 'scale(' + percentage + ')';
         element.style.transformOrigin = '0 0';
 
         // console.log(element.clientHeight * percentage);
-        IframeScaler.resizeHeight( element, percentage, this.options.upscale );
+        IframeScaler.resizeHeight( element, percentage, upscale );
     }
 
     static resizeHeight( element, percentage, upscale = false ) {

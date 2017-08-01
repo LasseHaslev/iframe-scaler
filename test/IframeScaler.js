@@ -147,12 +147,8 @@ describe( 'IframeScaler', t => {
 
     describe( '#scaleIframe()', () => {
         it('it scaling iframe to parent', function() {
-            let scaler = new IframeScaler( element, {
-                auto: false,
-                upscale: true,
-            } );
 
-            scaler.scaleIframe( element );
+            IframeScaler.scaleIframe( element, true );
 
             assert.equal( 'scale(2)', element.style.transform );
             assert.equal( '100px', element.style.marginBottom );
