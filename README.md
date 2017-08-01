@@ -48,8 +48,8 @@ scaler.watch();
 
 ### Static methods
 
-You almost never want to use the static methods.
-The `IframeScaler` has a set of useful static methods that `scale` and `watch` uses automaticly.
+You almost never want to use the static methods, but here is a reference.
+The `IframeScaler` has a set of useful static methods that `scale` and `watch` uses automatically.
 
 #### `getComputedSize()`
 
@@ -61,7 +61,7 @@ console.log( size.height );
 
 #### `resizeHeight()`
 
-Checks the width of the helement calculates the aspect ratio and adds this as margin to element (nagative or positive).
+Checks the width of the element calculates the aspect ratio and adds this as margin to element (negative or positive).
 
 ```js
 var percentage = .5;
