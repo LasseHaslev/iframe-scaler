@@ -52,8 +52,12 @@ class IframeScaler {
         this.scale();
 
         // watch for changes
-        window.addEventListener( 'resize', this.scale.bind( this ) );
+        window.addEventListener( 'resize', this.scale.bind( this ), true );
     }
+
+    // destroy() {
+        // window.removeEventListener( 'resize', this.scale, true );
+    // }
 
     // Do the scaling of the iframe
     static scaleIframe( iframe, upscale = false ) {

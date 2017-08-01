@@ -203,4 +203,22 @@ describe( 'IframeScaler', t => {
         });
         
     } )
+
+    // describe( '#destoy()', () => {
+        // it('removes listener', function() {
+            // let scaler = new IframeScaler( element, {
+                // upscale: true,
+                // watch: true,
+            // } );
+
+            // scaler.destroy();
+
+            // resizeWindow();
+
+            // assert.notEqual( 'scale(1.5)', element.style.transform );
+            // assert.notEqual( '50px', element.style.marginBottom );
+
+        // });
+        
+    // } )
 } );
