@@ -25,11 +25,11 @@ describe( 'IframeScaler', t => {
     describe( '#constructor()', () => {
         it('it has default options', function() {
 
-            let scaler = new IframeScaler();
+            let scaler = new IframeScaler( element );
 
             assert.deepEqual( {
                 upscale: false,
-                auto: false,
+                auto: true,
                 watch: false,
             }, scaler.options );
 
@@ -43,7 +43,7 @@ describe( 'IframeScaler', t => {
             assert.deepEqual( {
                 upscale: true,
 
-                auto: false,
+                auto: true,
                 watch: false,
             }, scaler.options );
         });
@@ -86,7 +86,8 @@ describe( 'IframeScaler', t => {
     describe( '#getComputedSize()', () => {
         it( 'can get element actual inner size', () => {
 
-            let scaler = new IframeScaler( {
+            let scaler = new IframeScaler( element, {
+                auto: false,
                 upscale: true,
             } );
 
@@ -100,7 +101,8 @@ describe( 'IframeScaler', t => {
     describe( '#resizeHeight()', () => {
         it('adds negative margin to bottom when resizing element', function() {
 
-            let scaler = new IframeScaler( {
+            let scaler = new IframeScaler( element, {
+                auto: false,
                 upscale: true,
             } );
 
@@ -109,9 +111,10 @@ describe( 'IframeScaler', t => {
             assert.equal( '-50px', element.style.marginBottom );
         });
 
-        it('it adds auto when trying to upscale and upscale is set to false', function() {
-            let scaler = new IframeScaler( {
+        it('it adds "auto" when trying to upscale and upscale is set to false', function() {
+            let scaler = new IframeScaler( element, {
                 upscale: false,
+                auto: false,
             } );
 
             scaler.resizeHeight( element, 1.5 );
@@ -126,6 +129,7 @@ describe( 'IframeScaler', t => {
 
             let scaler = new IframeScaler( element, {
                 upscale: true,
+                auto: false,
             } );
 
             let percentage = scaler.calculatePercentage( element );
@@ -135,6 +139,7 @@ describe( 'IframeScaler', t => {
 
         it('will not ask for higher percentage than 1 if upscale is set to false', function() {
             let scaler = new IframeScaler( element, {
+                auto: false,
                 upscale: false,
             } );
 
@@ -148,6 +153,7 @@ describe( 'IframeScaler', t => {
     describe( '#scaleIframe()', () => {
         it('it scaling iframe to parent', function() {
             let scaler = new IframeScaler( element, {
+                auto: false,
                 upscale: true,
             } );
 
@@ -162,6 +168,7 @@ describe( 'IframeScaler', t => {
     describe( '#scale()', () => {
         it('scales iframe to parent', function() {
             let scaler = new IframeScaler( element, {
+                auto: false,
                 upscale: true,
             } );
 
@@ -176,6 +183,7 @@ describe( 'IframeScaler', t => {
     describe( '#watch()', () => {
         it('resize first and watches for window change and resize iframe', function() {
             let scaler = new IframeScaler( element, {
+                auto: false,
                 upscale: true,
             } );
 

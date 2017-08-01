@@ -5,7 +5,7 @@ class IframeScaler {
         this.options = this.mergeObject( {
             upscale: false,
 
-            auto: false,
+            auto: true,
             watch: false,
         }, options );
 
