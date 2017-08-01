@@ -99,12 +99,7 @@ describe( 'IframeScaler', t => {
     describe( '#getComputedSize()', () => {
         it( 'can get element actual inner size', () => {
 
-            let scaler = new IframeScaler( element, {
-                auto: false,
-                upscale: true,
-            } );
-
-            let test = scaler.getComputedSize( element );
+            let test = IframeScaler.getComputedSize( element );
             assert.equal( 200, test.width );
             assert.equal( 100, test.height );
 
@@ -113,50 +108,37 @@ describe( 'IframeScaler', t => {
 
     describe( '#resizeHeight()', () => {
         it('adds negative margin to bottom when resizing element', function() {
-
-            let scaler = new IframeScaler( element, {
-                auto: false,
-                upscale: true,
-            } );
-
-            scaler.resizeHeight( element, .5 );
+            IframeScaler.resizeHeight( element, .5 );
 
             assert.equal( '-50px', element.style.marginBottom );
         });
 
         it('it adds "auto" when trying to upscale and upscale is set to false', function() {
-            let scaler = new IframeScaler( element, {
-                upscale: false,
-                auto: false,
-            } );
-
-            scaler.resizeHeight( element, 1.5 );
+            IframeScaler.resizeHeight( element, 1.5 );
 
             assert.equal( 'auto', element.style.marginBottom );
         });
+
+        it('can upscale if upscale option is "true"', function() {
+            IframeScaler.resizeHeight( element, 1.5, true );
+
+            assert.equal( '50px', element.style.marginBottom );
+        });
+        
         
     });
 
     describe( '#calculatePercentage()', () => {
         it('calculates percentage of the element based on parent element', function() {
 
-            let scaler = new IframeScaler( element, {
-                upscale: true,
-                auto: false,
-            } );
+            let percentage = IframeScaler.calculatePercentage( element, true );
 
-            let percentage = scaler.calculatePercentage( element );
-
-            assert.equal( 2, percentage );
+            assert.equal( 2, percentage, true );
         });
 
         it('will not ask for higher percentage than 1 if upscale is set to false', function() {
-            let scaler = new IframeScaler( element, {
-                auto: false,
-                upscale: false,
-            } );
 
-            let percentage = scaler.calculatePercentage( element );
+            let percentage = IframeScaler.calculatePercentage( element );
 
             assert.equal( 1, percentage );
         });

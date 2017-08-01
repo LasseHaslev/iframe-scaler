@@ -7,7 +7,7 @@ class IframeScaler {
             this.element = element;
         }
 
-        this.options = this.mergeObject( {
+        this.options = this._mergeObject( {
             upscale: false,
 
             auto: true,
@@ -25,7 +25,7 @@ class IframeScaler {
 
     }
 
-    mergeObject( object, options ) {
+    _mergeObject( object, options ) {
         for ( var attr in options ) {
             object[ attr ] = options[ attr ]
         }
@@ -56,17 +56,17 @@ class IframeScaler {
 
         var element = iframe ? iframe : this.element;
 
-        var percentage = this.calculatePercentage( element );
+        var percentage = IframeScaler.calculatePercentage( element, this.options.upscale );
         // http://stackoverflow.com/questions/166160/how-can-i-scale-the-content-of-an-iframe
         element.style.transform = 'scale(' + percentage + ')';
         element.style.transformOrigin = '0 0';
 
         // console.log(element.clientHeight * percentage);
-        this.resizeHeight( element, percentage );
+        IframeScaler.resizeHeight( element, percentage, this.options.upscale );
     }
 
-    resizeHeight( element, percentage ) {
-        if ( this.options.upscale || percentage < 1) {
+    static resizeHeight( element, percentage, upscale = false ) {
+        if ( upscale || percentage < 1) {
             var newHeight = -( element.getAttribute('height') - ( element.getAttribute('height') * percentage ) );
             element.style.marginBottom = newHeight + 'px';
         }
@@ -76,7 +76,7 @@ class IframeScaler {
     }
 
     // get the acctual width
-    getComputedSize( element ) {
+    static getComputedSize( element ) {
         var computedStyle = getComputedStyle( element );
 
         return {
@@ -101,7 +101,7 @@ class IframeScaler {
     }
 
     // Get the scale percentage 0-1
-    calculatePercentage( element ) {
+    static calculatePercentage( element, upscale = false ) {
 
         var element = element ? element : this.element;
 
@@ -110,12 +110,12 @@ class IframeScaler {
         // var myParent = this.data.parent ? this.data.parent : element.parentElement;
 
         // Get the innerWidth
-        var parentInnerSize = this.getComputedSize(myParent);
+        var parentInnerSize = IframeScaler.getComputedSize(myParent);
         // Get the percentage width
         var percentage =  parentInnerSize.width / element.getAttribute('width');
 
         // Prevent scaling upwards and return value
-        return this.options.upscale || percentage < 1 ? percentage : 1;
+        return upscale || percentage < 1 ? percentage : 1;
     }
 }
 
