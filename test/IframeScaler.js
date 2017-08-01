@@ -96,6 +96,19 @@ describe( 'IframeScaler', t => {
 
     } );
 
+    describe( '#setElement()', () => {
+        it('can set element through function', function() {
+            let scaler = new IframeScaler();
+
+            assert.equal( null, scaler.element );
+
+            scaler.setElement( element );
+
+            assert.equal( element, scaler.element );
+        });
+        
+    } )
+
     describe( '#getComputedSize()', () => {
         it( 'can get element actual inner size', () => {
 

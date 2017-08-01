@@ -32,6 +32,10 @@ class IframeScaler {
         return object;
     }
 
+    setElement( element ) {
+        this.element = element;
+    }
+
     /*
      * Scale one time
      */
