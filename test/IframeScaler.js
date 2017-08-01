@@ -16,6 +16,34 @@ beforeEach( () => {
 } );
 
 describe( 'IframeScaler', t => {
+
+    describe( '#constructor()', () => {
+        it('it has default options', function() {
+
+            let scaler = new IframeScaler();
+
+            assert.deepEqual( {
+                parent: null,
+                upscale: false,
+            }, scaler.options );
+
+        });
+
+        it('can set options when creating object', function() {
+            let scaler = new IframeScaler( element, {
+                parent:null,
+                upscale: true,
+            } );
+
+            assert.deepEqual( {
+                parent: null,
+                upscale: true,
+            }, scaler.options );
+        });
+        
+        
+    } );
+
     describe( '#getComputedSize()', () => {
         it( 'can get element actual inner size', () => {
 
