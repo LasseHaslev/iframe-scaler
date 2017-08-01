@@ -4,6 +4,7 @@ let element;
 beforeEach( () => {
     element = document.createElement( 'iframe' );
 
+    document.body.style.width = '400px';
     document.body.appendChild( element );
 
     element.setAttribute( 'width', 200 );
@@ -40,8 +41,7 @@ describe( 'IframeScaler', t => {
                 upscale: true,
             }, scaler.options );
         });
-        
-        
+
     } );
 
     describe( '#getComputedSize()', () => {
@@ -80,5 +80,29 @@ describe( 'IframeScaler', t => {
             assert.equal( 'auto', element.style.marginBottom );
         });
         
-    })
+    });
+
+    describe( '#calculatePercentage()', () => {
+        it('calculates percentage of the element based on parent element', function() {
+
+            let scaler = new IframeScaler( element, {
+                upscale: true,
+            } );
+
+            let percentage = scaler.calculatePercentage( element );
+
+            assert.equal( 2, percentage );
+        });
+
+        it('will not ask for higher percentage than 1 if upscale is set to false', function() {
+            let scaler = new IframeScaler( element, {
+                upscale: false,
+            } );
+
+            let percentage = scaler.calculatePercentage( element );
+
+            assert.equal( 1, percentage );
+        });
+        
+    } );
 } );
