@@ -53,11 +53,6 @@ class IframeScaler {
         // var elementWidth = element.clientWidth;   // width with padding
         // var elementHeight = element.clientHeight;  // height with padding
 
-        // console.log(element.offsetWidth);
-        // console.log(elementWidth);
-        // console.log(computedStyle.width);
-        // console.log(computedStyle.paddingBottom);
-
         // // remove padding width cause we actually want to know the inner size
         // elementWidth -= parseFloat(computedStyle.paddingLeft);
         // elementWidth -= parseFloat(computedStyle.paddingRight);
