@@ -1,4 +1,4 @@
-export default class IframeScaler {
+class IframeScaler {
 
     constructor( element, options ) {
 
@@ -34,7 +34,6 @@ export default class IframeScaler {
     resizeHeight( element, percentage ) {
         if ( this.options.upscale || percentage < 1) {
             var newHeight = -( element.getAttribute('height') - ( element.getAttribute('height') * percentage ) );
-            console.log(newHeight);
             element.style.marginBottom = newHeight + 'px';
         }
         else {
@@ -43,18 +42,33 @@ export default class IframeScaler {
     }
 
     // get the acctual width
-    getAcctualInnerSize( element ) {
+    getComputedSize( element ) {
         var computedStyle = getComputedStyle( element );
-        var elementHeight = element.clientHeight;  // height with padding
-        var elementWidth = element.clientWidth;   // width with padding
-
-        elementHeight -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
-        elementWidth -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
 
         return {
-            width: elementWidth,
-            height: elementHeight,
+            width: parseFloat( computedStyle.width ),
+            height: parseFloat( computedStyle.height ),
         };
+
+        // var elementWidth = element.clientWidth;   // width with padding
+        // var elementHeight = element.clientHeight;  // height with padding
+
+        // console.log(element.offsetWidth);
+        // console.log(elementWidth);
+        // console.log(computedStyle.width);
+        // console.log(computedStyle.paddingBottom);
+
+        // // remove padding width cause we actually want to know the inner size
+        // elementWidth -= parseFloat(computedStyle.paddingLeft);
+        // elementWidth -= parseFloat(computedStyle.paddingRight);
+
+        // elementHeight -= parseFloat(computedStyle.paddingTop);
+        // elementHeight -= parseFloat(computedStyle.paddingBottom);
+
+        // return {
+            // width: elementWidth,
+            // height: elementHeight,
+        // };
     }
 
     // Get the scale percentage 0-1
@@ -67,11 +81,18 @@ export default class IframeScaler {
         // var myParent = this.data.parent ? this.data.parent : element.parentElement;
 
         // Get the innerWidth
-        var parentInnerSize = this.getAcctualInnerSize(myParent);
+        var parentInnerSize = this.getComputedSize(myParent);
         // Get the percentage width
         var percentage =  parentInnerSize.width / element.getAttribute('width');
 
         // Prevent scaling upwards and return value
         return this.options.upscale || percentage < 1 ? percentage : 1;
     }
+}
+
+if ( typeof module !== 'undefined' && typeof module.exports !== 'undefined' ) {
+    module.exports = IframeScaler;
+}
+else {
+    window.IframeScaler = IframeScaler;
 }

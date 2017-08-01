@@ -2,3 +2,4 @@ src/
 test/
 tags
 .yarn.lock
+karma.conf.js
