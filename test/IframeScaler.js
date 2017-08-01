@@ -1,6 +1,10 @@
 // import IframeScaler from './dist/index';
 
 let element;
+let resizeWindow = function() {
+    document.body.style.width = '300px';
+    window.dispatchEvent(new Event('resize'));
+}
 beforeEach( () => {
     element = document.createElement( 'iframe' );
 
@@ -24,23 +28,59 @@ describe( 'IframeScaler', t => {
             let scaler = new IframeScaler();
 
             assert.deepEqual( {
-                parent: null,
                 upscale: false,
+                auto: false,
+                watch: false,
             }, scaler.options );
 
         });
 
         it('can set options when creating object', function() {
             let scaler = new IframeScaler( element, {
-                parent:null,
                 upscale: true,
             } );
 
             assert.deepEqual( {
-                parent: null,
                 upscale: true,
+
+                auto: false,
+                watch: false,
             }, scaler.options );
         });
+
+        it('resizes element if option auto is set to true', function() {
+            let scaler = new IframeScaler( element, {
+                upscale: true,
+                auto: true,
+            } );
+
+            assert.equal( 'scale(2)', element.style.transform );
+            assert.equal( '100px', element.style.marginBottom );
+
+            resizeWindow();
+
+            assert.equal( 'scale(2)', element.style.transform );
+            assert.equal( '100px', element.style.marginBottom );
+
+        });
+
+        it('resizes and watching element if option auto and watch is set to true', function() {
+            let scaler = new IframeScaler( element, {
+                upscale: true,
+                auto: true,
+                watch: true,
+            } );
+
+            assert.equal( 'scale(2)', element.style.transform );
+            assert.equal( '100px', element.style.marginBottom );
+
+            resizeWindow();
+
+            assert.equal( 'scale(1.5)', element.style.transform );
+            assert.equal( '50px', element.style.marginBottom );
+
+        });
+
 
     } );
 
@@ -105,4 +145,51 @@ describe( 'IframeScaler', t => {
         });
         
     } );
+
+    describe( '#scaleIframe()', () => {
+        it('it scaling iframe to parent', function() {
+            let scaler = new IframeScaler( element, {
+                upscale: true,
+            } );
+
+            scaler.scaleIframe( element );
+
+            assert.equal( 'scale(2)', element.style.transform );
+            assert.equal( '100px', element.style.marginBottom );
+        });
+        
+    } )
+
+    describe( '#scale()', () => {
+        it('scales iframe to parent', function() {
+            let scaler = new IframeScaler( element, {
+                upscale: true,
+            } );
+
+            scaler.scale();
+
+            assert.equal( 'scale(2)', element.style.transform );
+            assert.equal( '100px', element.style.marginBottom );
+        });
+        
+    } )
+
+    describe( '#watch()', () => {
+        it('resize first and watches for window change and resize iframe', function() {
+            let scaler = new IframeScaler( element, {
+                upscale: true,
+            } );
+
+            scaler.watch();
+
+            assert.equal( 'scale(2)', element.style.transform );
+            assert.equal( '100px', element.style.marginBottom );
+
+            resizeWindow();
+
+            assert.equal( 'scale(1.5)', element.style.transform );
+            assert.equal( '50px', element.style.marginBottom );
+        });
+        
+    } )
 } );

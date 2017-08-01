@@ -1,11 +1,22 @@
 class IframeScaler {
 
     constructor( element, options ) {
-
+        this.element = element;
         this.options = this.mergeObject( {
-            parent: null,
             upscale: false,
+
+            auto: false,
+            watch: false,
         }, options );
+
+        if (this.options.auto) {
+            if (this.options.watch) {
+                this.watch();
+            }
+            else {
+                this.scale();
+            }
+        }
 
     }
 
@@ -16,6 +27,24 @@ class IframeScaler {
         return object;
     }
 
+    /*
+     * Scale one time
+     */
+    scale() {
+        this.scaleIframe( this.element );
+    }
+
+    /*
+     * Watch for window change and scale iframe
+     */
+    watch() {
+
+        // Run one time
+        this.scale();
+
+        // watch for changes
+        window.addEventListener( 'resize', this.scale.bind( this ) );
+    }
 
     // Do the scaling of the iframe
     scaleIframe( iframe ) {
