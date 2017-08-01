@@ -9,13 +9,12 @@ class IframeScaler {
             watch: false,
         }, options );
 
-        if (this.options.auto) {
-            if (this.options.watch) {
-                this.watch();
-            }
-            else {
-                this.scale();
-            }
+
+        if (this.options.watch) {
+            this.watch();
+        }
+        else if (this.options.auto) {
+            this.scale();
         }
 
     }

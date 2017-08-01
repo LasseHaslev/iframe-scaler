@@ -64,10 +64,9 @@ describe( 'IframeScaler', t => {
 
         });
 
-        it('resizes and watching element if option auto and watch is set to true', function() {
+        it('resizes and watching element if option watch is set to true', function() {
             let scaler = new IframeScaler( element, {
                 upscale: true,
-                auto: true,
                 watch: true,
             } );
 
