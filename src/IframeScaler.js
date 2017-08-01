@@ -1,19 +1,25 @@
 class IframeScaler {
 
     constructor( element, options ) {
-        this.element = element;
+
+        this.element = null;
+        if (element instanceof Element) {
+            this.element = element;
+        }
+
         this.options = this.mergeObject( {
             upscale: false,
 
             auto: true,
             watch: false,
-        }, options );
+        }, this.element ? options : element );
 
 
-        if (this.options.watch) {
+
+        if (this.element && this.options.watch) {
             this.watch();
         }
-        else if (this.options.auto) {
+        else if (this.element && this.options.auto) {
             this.scale();
         }
 

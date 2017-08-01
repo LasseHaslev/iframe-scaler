@@ -48,6 +48,19 @@ describe( 'IframeScaler', t => {
             }, scaler.options );
         });
 
+        it('uses first parameter as option if element is not provided', function() {
+            let scaler = new IframeScaler( {
+                upscale: true,
+            } );
+
+            assert.deepEqual( {
+                upscale: true,
+
+                auto: true,
+                watch: false,
+            }, scaler.options );
+        });
+
         it('resizes element if option auto is set to true', function() {
             let scaler = new IframeScaler( element, {
                 upscale: true,
