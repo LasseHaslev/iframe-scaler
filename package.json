@@ -1,7 +1,7 @@
 {
   "name": "@lassehaslev/iframe-scaler",
   "version": "0.1.0",
-  "description": "Scale iframes propotionally",
+  "description": "Scale iframes based on parent width.",
   "main": "dist/index.js",
   "scripts": {
     "test": "karma start --single-run --browsers ChromeHeadless karma.conf.js",
