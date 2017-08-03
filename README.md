@@ -20,6 +20,10 @@ npm install @lassehaslev/iframe-scaler --save-dev
 ### Quick start
 
 ```js
+// When using a package service like webpack and browserify
+// Create a reference to package like so
+// var IframeScaler = require( '@lassehaslev/iframe-scaler' );
+
 var element = document.querySelector( '.your-element' );
 
 // Scale once

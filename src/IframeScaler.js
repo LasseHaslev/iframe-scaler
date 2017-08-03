@@ -127,6 +127,7 @@ class IframeScaler {
     }
 }
 
+// Export both to modules and to window
 if ( typeof module !== 'undefined' && typeof module.exports !== 'undefined' ) {
     module.exports = IframeScaler;
 }

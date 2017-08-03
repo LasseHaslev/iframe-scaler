@@ -2,7 +2,7 @@
   "name": "@lassehaslev/iframe-scaler",
   "version": "0.1.0",
   "description": "Scale iframes based on parent width.",
-  "main": "dist/index.js",
+  "main": "dist/IframeScaler.js",
   "scripts": {
     "test": "karma start --single-run --browsers ChromeHeadless karma.conf.js",
     "tdd": "executor 'npm run build && npm run test' --watch='**/*.js' --ignore='node_modules/' --ignore='dist/'",
