@@ -1,6 +1,6 @@
 {
   "name": "@lassehaslev/iframe-scaler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scale iframes based on parent width.",
   "main": "dist/IframeScaler.js",
   "scripts": {
